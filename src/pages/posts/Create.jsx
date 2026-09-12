@@ -1,28 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { usePostStore } from "../../store/postStore";
 
 export function Create() {
-  const [post, setPost] = useState({
-    title: "",
-    content: "",
-  });
+  const { handlePost, post, storePost, setPost } = usePostStore();
 
-  const handlePost = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setPost({ ...post, [name]: value });
-    console.log(post);
-  };
-
-  const storePost = async (e) => {
-    e.preventDefault();
-
-    const res = await axios.post(`http://localhost:3000/posts`, post);
+  useEffect(() => {
     setPost({
       title: "",
       content: "",
     });
-  };
+  }, []);
 
   return (
     <div>

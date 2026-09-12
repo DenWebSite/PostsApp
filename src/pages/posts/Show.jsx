@@ -1,23 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { usePostStore } from "../../store/postStore";
 
 export function PostShow() {
   const { id } = useParams();
-
-  const [post, setPost] = useState({
-    id: null,
-    title: "",
-    content: "",
-  });
-
-  const getPost = async () => {
-    const res = await axios.get(`http://localhost:3000/posts/${id}`);
-    setPost(res.data);
-  };
+  const { getPost, post } = usePostStore();
 
   useEffect(() => {
-    getPost();
+    getPost(id);
   }, []);
 
   return (

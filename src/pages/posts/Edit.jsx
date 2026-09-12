@@ -1,39 +1,14 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { usePostStore } from "../../store/postStore";
 
 export function Edit() {
   const { id } = useParams();
-
-  const [post, setPost] = useState({
-    id: null,
-    title: "",
-    content: "",
-  });
-
-  const getPost = async () => {
-    const res = await axios.get(`http://localhost:3000/posts/${id}`);
-    setPost(res.data);
-  };
+  const { getPost, post, updatePost, handlePost } = usePostStore();
 
   useEffect(() => {
-    getPost();
+    getPost(id);
   }, []);
-
-  //
-
-  const handlePost = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setPost({ ...post, [name]: value });
-    console.log(post);
-  };
-
-  const updatePost = async (e) => {
-    e.preventDefault();
-
-    const res = await axios.patch(`http://localhost:3000/posts/${id}`, post);
-  };
 
   return (
     <div>

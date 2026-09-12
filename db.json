@@ -1,0 +1,10 @@
+{
+  "posts": [
+    {
+      "title": "2",
+      "content": "2",
+      "id": "kiJT3_yeE-Y"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
